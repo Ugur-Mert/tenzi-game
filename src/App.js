@@ -8,6 +8,8 @@ export default function App() {
 
   const [tenzies, setTenzies] = React.useState(false);
 
+  const [count, setCount] = React.useState(0);
+
   React.useEffect(() => {
     const allHeld = dice.every((die) => die.isHeld);
     const firstValue = dice[0].value;
@@ -19,7 +21,7 @@ export default function App() {
   }, [dice]);
 
   function generateNewDie() {
-    const randomNumber = Math.floor(Math.random() * 6 + 1);
+    const randomNumber = Math.floor(Math.random() * 6);
     return { value: randomNumber, isHeld: false, id: nanoid() };
   }
 
@@ -43,6 +45,7 @@ export default function App() {
   function randomDice(id, die) {
     //roll dice
     if (!tenzies) {
+      setCount(count + 1);
       setDice((oldDice) =>
         oldDice.map((die) => {
           return die.isHeld ? die : generateNewDie();
@@ -50,6 +53,7 @@ export default function App() {
       );
     } else {
       //New game
+      setCount(0);
       setTenzies(false);
       setDice(allNewDice());
     }
@@ -77,6 +81,8 @@ export default function App() {
           {tenzies ? "New Game" : "Roll"}
         </button>
       }
+      <h1>Number of rolls: {count}</h1>
+      <h1 className="you-won">{tenzies ? "You Won!" : ""}</h1>
     </main>
   );
 }
