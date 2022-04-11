@@ -1,12 +1,6 @@
 import React from "react";
 
 export default function Die(props) {
-  //const [select, setSelect] = React.useState(props.isHeld);
-
-  // function selectDice() {
-  //   setSelect((prevSelect) => !prevSelect);
-  // }
-
   return (
     <div>
       <button
